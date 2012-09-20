@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,9 +37,11 @@ public class ProcressRunnable implements Runnable{
 			while (tag) {
 //				System.out.println("server get input from client socket..");
 				String txt = reader.readLine();
-				System.out.println("txt:"+txt);
 				if(txt!=null&& !"".equalsIgnoreCase(txt)){
+//					System.out.println("txt:"+txt);
 					processContext(txt);
+				}else{
+					
 				}
 			}
 		} catch (IOException e) {
@@ -48,17 +51,43 @@ public class ProcressRunnable implements Runnable{
 		
 	}
 	
+	public void stop(){
+		tag = false;
+	}
+	
 	private void processContext(String txt) {
 		JSONObject jsonObject = JSONObject.fromObject(txt);
 		if(jsonObject == null){
 			return;
 		}
-		int x = jsonObject.getInt("x");
-		int y  = jsonObject.getInt("y");
-		Point mousepoint = MouseInfo.getPointerInfo().getLocation();
-		int x2 = (int)mousepoint.getX()+x;
-		int y2 = (int)mousepoint.getY()+y;
-		robot.mouseMove(x2, y2);
+		int type = jsonObject.getInt("type");
+		switch (type) {
+		case Event.MOVE:
+			int x = jsonObject.getInt("x");
+			int y  = jsonObject.getInt("y");
+			Point mousepoint = MouseInfo.getPointerInfo().getLocation();
+			int x2 = (int)mousepoint.getX()+x;
+			int y2 = (int)mousepoint.getY()+y;
+			robot.mouseMove(x2, y2);
+			break;
+		case Event.CLICK:
+			robot.mousePress(InputEvent.BUTTON1_MASK);
+			robot.mouseRelease(InputEvent.BUTTON1_MASK);
+			break;
+		case Event.RIGHTCLICK:
+			robot.mousePress(InputEvent.BUTTON3_MASK);
+			robot.mouseRelease(InputEvent.BUTTON3_MASK);
+			break;
+		case Event.DOUBLECLICK:
+			robot.mousePress(InputEvent.BUTTON1_MASK);
+			robot.mouseRelease(InputEvent.BUTTON1_MASK);
+			robot.mousePress(InputEvent.BUTTON1_MASK);
+			robot.mouseRelease(InputEvent.BUTTON1_MASK);
+			break;
+		default:
+			break;
+		}
+		
 	}
 	
 	
