@@ -20,15 +20,15 @@ public class YaoChatServer extends Thread {
 	private int width;
 	private int height;
 	private Thread thread;
-	private ProcressRunnable runnable;
+	private ProcressRunnable run;
 
 	private YaoChatServer() throws IOException {
 		server = new ServerSocket(PORT, 100);
 		System.out.println("Server starting..");
 			
-			dim = Toolkit.getDefaultToolkit().getScreenSize();
-			width = (int)dim.getWidth();
-			height =  (int)dim.getHeight();
+		dim = Toolkit.getDefaultToolkit().getScreenSize();
+		width = (int)dim.getWidth();
+		height =  (int)dim.getHeight();
 	}
 
 	public void run() {
@@ -37,7 +37,11 @@ public class YaoChatServer extends Thread {
 				Socket client = server.accept();
 				System.out.println("client connected..");
 				if (client != null) {
-					thread = new Thread(new ProcressRunnable(client));
+					if(run!=null){
+						run.stop();
+					}
+					run = new ProcressRunnable(client);
+					thread = new Thread(run);
 					thread.start();
 				}
 //				CloseSocket(client);
