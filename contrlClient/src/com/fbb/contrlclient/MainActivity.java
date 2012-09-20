@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 	int startY;
 	private ArrayList<point> points;
 	
+	
 	class point{
 		int x;
 		int y;
