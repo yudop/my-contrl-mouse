@@ -2,13 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-
-    <TextView
+    
+    
+	<TextView android:id="@+id/textView_result"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+	    />
+    <Button android:id="@+id/button_open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:text="conntection"/>
+    <Button android:id="@+id/button_touchboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_open"
+         android:layout_centerHorizontal="true"
+        android:text="opentouchBoard"/>
 
 </RelativeLayout>
