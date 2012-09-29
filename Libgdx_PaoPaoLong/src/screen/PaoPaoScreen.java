@@ -3,12 +3,10 @@ package screen;
 import java.util.ArrayList;
 import java.util.Random;
 
-import utils.PPData;
-import utils.Utils;
-
 import model.Ball;
 import model.FruitWord;
-import model.MyBall;
+import utils.PPData;
+import utils.Utils;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
