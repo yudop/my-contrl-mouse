@@ -18,6 +18,8 @@ public class Assets {
 	public static TextureRegion mi;
 	public static TextureRegion mj;
 	
+	public static TextureRegion mm;
+	
 	public static Texture ms;
 	
 	public static void load(){
@@ -29,6 +31,8 @@ public class Assets {
 		md = new TextureRegion(ms, 371+62*3, 70, 62, 62);
 		me = new TextureRegion(ms, 371+62*4, 70, 62, 62);
 		mf = new TextureRegion(ms, 371+62*5, 70, 62, 62);
+		
+		mm = new TextureRegion(ms, 0, 0, 100, 100);
 	}
 	
 	public static void playSounds(Sound sound){
